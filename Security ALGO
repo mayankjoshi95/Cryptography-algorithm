@@ -1,0 +1,431 @@
+#EXTENDED EUCLIDEAN ALGORITHM
+
+
+import math
+a1=1 
+a2=0
+b1=0
+b2=1
+
+
+number =input ("enter the number too find the inverse")
+modulus=input("enter the number to take modulus with")
+z=int(modulus)
+checknumber=isinstance(int(number),int)
+checkmodulus=isinstance(int(modulus),int)
+if checknumber==False:
+  if checkmodulus==False:
+    print("values are float ")
+    number =input ("enter the number too find the inverse")
+    modulus=input("enter the number to take modulus with")
+     
+
+if int(modulus)<=0:
+ if int(number)<=0:   
+
+    print("values are negative put postive value")
+    number =input ("enter the number too find the inverse")
+    modulus=input("enter the number to take modulus with")
+ 
+while int(number)>=int(modulus):
+  print("write again")
+  print("number is greater than modulus")
+  number =input ("enter the number too find the inverse")
+  modulus=input("enter the number to take modulus with") 
+
+
+def div(modulus,number):# to get the vale of quotient and rremainder
+  global q #so that quotient value can be used everywhere
+  global r #so that remainder can be
+  quotient,remainder=divmod(int(modulus),int(number))
+  q=int(quotient)
+  r=int(remainder)
+  if r!=0:
+   print("the quotient is",q)
+   print("the remainderis",r)
+   return modulus
+   return number
+  else:
+    return 0  #for the function to return some value when remainder goes to zero
+def invert(a1,b1,a2,b2):#functiion to modify value of a1 ,b1,a2,b2 to find the inverse
+   
+  
+   a=a1 - int(q) * b1
+   
+   a1=b1
+   b1=a  
+  
+   b=a2 - int(q) * b2
+   
+   
+   a2=b2
+   b2=b
+   return a1,b1,a2,b2 
+    
+
+def inv(modulus,number):#function to modify the value of modulus annd number
+  div(modulus,number)
+  modulus=number
+  number=r
+  return modulus, number
+
+while number!=0:
+  if int(number)!=0:#to stop the recursive process when inverse is found out
+    global modulus#to use the value of moduluss globally
+    global q
+  if math.gcd(int(number) ,int(modulus))==1:#check is the number are coprime
+     modulus,number=inv(modulus,number)#call to update the value of quotient or remainder by modyfying modulus and number
+     a1,b1,a2,b2=invert(a1,b1,a2,b2)#updae the value of a1,b1,b2,a2
+  else :
+    while math.gcd(int(number),int(modulus))!=1:
+     print("since the number are not coprime inverse cannot be found")
+    
+    
+     print("enter again")
+     number =input ("enter the number too find the inverse")
+     modulus=input("enter the number to take modulus with") 
+    
+  if number==1:#to stop the for loop fromm running much after gettting the inverse
+    print("the inverse of the given number in the given modulus is",b2%z)
+  elif int(number)<=1:
+    break
+ 
+
+
+
+
+
+
+
+
+
+#RSA ALGORITHM
+
+
+import math
+a1=1 
+a2=0
+b1=0
+b2=1
+count=0
+countq=0
+enckey=list()
+deckey=list()
+
+P=input("enter a random primeONE")
+Q=input("enter a random primeTWO")
+for i in range (1,int(P)+1):
+    if int(P)%i==0:
+        count=count+1
+
+while count!=1 and count!=2:
+ P=input("enter a random number again P")
+ count=0
+ for i in range (1,int(P)+1):
+   
+   if int(P)%i==0:
+    count=count+1
+    
+for i in range (1,int(Q)+1):
+    if int(Q)%i==0:
+     countq=countq+1        
+while countq!=1 and countq!=2:
+ Q=input("enter a random number again Q") 
+ countq=0
+ for i in range (1,int(Q)+1):
+    if int(Q)%i==0:
+      countq=countq+1
+    
+n=int(P)*int(Q)
+enckey.append(n)
+deckey.append(n)
+print("the product is",n )
+from sympy.ntheory.factor_ import totient
+phin=totient(n)
+print("the totient is",phin)
+
+number =input ("enter the number too find the inverse")
+while int(number)<1 and int(number)>phin:
+ number=input("print the number again")
+while math.gcd(int(number),phin)!=1:
+    number=input("print the number again")
+    
+enckey.append(int(number))
+w=number
+ 
+modulus=phin
+z=int(modulus)
+num=type(number)
+mod=type(number)
+while num and mod == float:
+    print("value are floating type")
+    number =input ("enter the number too find the inverse")
+    modulus=input("enter the number to take modulus with")
+while int(modulus) and int(number)<=0:   
+
+    print("values are negative put postive value")
+    number =input ("enter the number too find the inverse")
+    modulus=input("enter the number to take modulus with")
+ 
+while int(number)>=int(modulus):
+  print("write again")
+  print("number is greater than modulus")
+  number =input ("enter the number too find the inverse")
+  modulus=input("enter the number to take modulus with") 
+
+
+def div(modulus,number):# to get the vale of quotient and rremainder
+  global q #so that quotient value can be used everywhere
+  global r #so that remainder can be
+  quotient,remainder=divmod(int(modulus),int(number))
+  q=int(quotient)
+  r=int(remainder)
+  if r!=0:
+   print("the quotient is",q)
+   print("the remainderis",r)
+   return modulus
+   return number
+  else:
+    return 0  #for the function to return some value when remainder goes to zero
+def invert(a1,b1,a2,b2):#functiion to modify value of a1 ,b1,a2,b2 to find the inverse
+   
+  
+   a=a1 - int(q) * b1
+   
+   a1=b1
+   b1=a  
+  
+   b=a2 - int(q) * b2
+   
+   
+   a2=b2
+   b2=b
+   return a1,b1,a2,b2 
+    
+
+def inv(modulus,number):#function to modify the value of modulus annd number
+  div(modulus,number)
+  modulus=number
+  number=r
+  return modulus, number
+
+while number!=0:
+  if int(number)!=0:#to stop the recursive process when inverse is found out
+    global modulus#to use the value of moduluss globally
+    global q
+  if math.gcd(int(number) ,int(modulus))==1:#check is the number are coprime
+     modulus,number=inv(modulus,number)#call to update the value of quotient or remainder by modyfying modulus and number
+     a1,b1,a2,b2=invert(a1,b1,a2,b2)#updae the value of a1,b1,b2,a2
+  else :
+    while math.gcd(int(number),int(modulus))!=1:
+     print("since the number are not coprime inverse cannot be found")
+    
+    
+     print("enter again")
+     number =input ("enter the number too find the inverse")
+     modulus=phin
+    
+  if number==1:#to stop the for loop fromm running much after gettting the inverse
+    print("the d number is",b2%z)
+    T=b2%z
+    deckey.append(b2%z)
+  elif int(number)<=1:
+    break
+print("the enckey is",enckey)
+print("the deckey is",deckey)
+M=input("enter the messsage")
+C=(int(M)**int(w))%int(n)
+print("the c is",C)
+R=(int(C)**int(T))%int(n)
+print("the R is",R)
+if int(R)==int(M):
+    print("rsa is done")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#LAMPORT FOR 4 INTEGER
+
+
+import hashlib
+
+
+sk0=list(())
+sk1=list(())
+pk0=list(())
+pk1=list(())
+msg=list(())
+sig=list(('0','0','0','1'))
+msghash=list(())
+hashbob=list(())
+print("the random number you want write of sk0 and sk1")
+for x in range(4):
+    z=input()
+    e=input()
+    sk0.append(z)
+    sk1.append(e)
+print("the sk0 is",sk0)
+print("the sk1 is ",sk1)
+for i in range (4):
+ sk0[i].encode()
+ hashn=hashlib.sha256( sk0[i].encode())
+ hasht=hashn.hexdigest()
+ pk0.append(hasht)
+ sk1[i].encode()
+ hashe=hashlib.sha256( sk1[i].encode())
+ hashr=hashe.hexdigest()
+ pk1.append(hashr)
+print("the pk0 is",pk0)
+print("the pk1 is",pk1)
+print("input the message")
+for i in range (4):
+ u=input()
+ msg.append(u)
+print(msg)
+
+      
+#for i in range(4):
+ #if msg[i]=='0':
+    #sig.append(sk0[i])
+# if msg[i]=='1':
+   # sig.append(sk1[i])
+    
+print("the signature for the mesesage is",sig)   #signature generted
+for i in range(4):#message sent
+    z=msg[i]
+    
+    if z=='0':
+        
+        
+        msghash.append(pk0[i])
+    if z=='1':
+        msghash.append(pk1[i])
+print("the message hash code for bob",msghash)  
+for i in range(4):
+    
+ sig[i].encode()
+ hashn=hashlib.sha256( sig[i].encode())
+ hasht=hashn.hexdigest()
+ hashbob.append(hasht)
+print("the siganture hash code for bob",hashbob)
+
+
+for i in range(4):
+    if hashbob[i]==msghash[i]:
+        print("verification is succesful for all signature at position",i)
+    else :
+        break
+print("signature fails")        
+
+
+
+
+
+
+
+
+
+
+#NTRU
+
+
+import numpy as np
+
+  
+# Constructing polynomial
+print("FOR N=5,p=3,q=16 we have NTRU SYSTEM")
+f= np.poly1d([1,0,0,1,-1])
+
+g = np.poly1d([1, 0, -1, 0])
+Fp=np.poly1d([1,1,0,-1])
+h=np.poly1d([-1,-2,0,2,1])
+m=np.poly1d([1,1,1])
+
+phi=np.poly1d([1,1])
+mod=np.poly1d([1,0,0,0,0,-1])
+q=16
+c=(3*phi*h)+m
+
+quo1,rem1=np.polydiv(c,mod)
+
+a=f*rem1
+quo2,rem2=np.polydiv(a,mod)
+z=Fp*rem2
+quo3,rem3=np.polydiv(z,mod)
+
+
+ttt=list() 
+print("the value of f is")
+print ( f)
+print("the value of g is")
+print ( g)
+print("the message sent by alice")
+print(m)
+print("the random variable chosen")
+print(phi)
+print("the cipher text calculated is ")
+print(rem1)
+print("bob decrypt by first computing a")
+print(rem2)
+
+for ii in range (5):
+    ttt.append(int(rem3[ii]%3))
+print("the output message found by bob")
+print(np.poly1d([ttt[4],ttt[3],ttt[2],ttt[1],ttt[0]]))
+ 
+
+#SHA 256
+
+
+
+
+
+import hashlib
+
+paass=list(())
+
+name= input("enter ")
+
+
+encode=name.encode()
+hashname=hashlib.sha256(encode)
+hashcode=hashname.hexdigest()
+paass.append(hashcode)
+print("the paass is",paass[0])
+
+
+myname=list(())
+hasht=list(())
+for i in range(16):
+  name2=input("search for the password by putting numbers")
+  myname.append(name2)
+
+for i in range(16):
+  myname[i].encode()
+  hashn=hashlib.sha256( myname[i].encode())
+  hasht.append(hashn.hexdigest())
+
+  
+  
+    
+
+  if(hasht[i]==paass[0]):
+    print("the original password entered  ",name) 
+    
+    
+    
+    
+    
+    
+    
+   
